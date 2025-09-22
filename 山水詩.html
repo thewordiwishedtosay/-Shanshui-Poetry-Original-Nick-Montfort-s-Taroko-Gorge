@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<!--
+
+Taroko Gorge
+Original Python program:
+8 January 2009, Taroko Gorge National Park, Taiwan and Eva Air Flight 28
+This JavaScript version, with links:
+5 May 2020
+
+Copyright (c) 2009-2020 Nick Montfort <nickm@nickm.com>
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+-->
+<style type="text/css">
+/* <![CDATA[ */
+body {
+    background: #062;
+    color: #dad;
+    margin: 0 24pt 0 24pt;
+    font-family: "Songti SC", "STSong", "SimSun", sans-serif; /* Fonts for Chinese characters */
+    font-size: 16pt; /* Increased font size for better readability */
+}
+div {
+    height: 20pt;
+}
+a {
+    color: #117;
+    text-decoration: none;
+}
+#colophon {
+    float:right;
+    margin-top:12px;
+    color:#0b3;
+    height:60pt;
+}
+/* ]]> */
+</style>
+
+<script>
+var t = 0;
+var n = 0;
+var paths = 0;
+
+var above = '山,雲,月,天,峯,林,霧,日,星,河,雪,風,樓,海,田,暮,霞,風,煙,鳥,秋,春,夏,冬,潮'.split(',');
+var below = '水,石,泉,溪,谷,徑,舟,影,雨,鶴,松,翠,城,柳,蟬,花,村,桂,澗,桃,葉'.split(',');
+var trans = '望,聽,尋,渡,映,拂,染,過,鳴,驚,落,卷,含,吞,照,蕩,漾,弄,淡,畫'.split(',');
+var imper = '入,登,臨,訪,觀,探,涉,覓,歸'.split(',');
+var intrans = '靜,流,浮,沉,幽,空,閒,夢,閒,居,樂,憂,在,寂,遼,愁,廖'.split(',');
+var adjs = '古,清,深,靜,幽,寒,遠,空'.split(',');
+var nouns = '林,谷,泉,寺,潭,庵,臺,洞,岫'.split(',');
+
+function rand_range(max) {
+    return Math.floor(Math.random() * (max + 1));
+}
+
+function choose(array) {
+    return array[rand_range(array.length - 1)];
+}
+
+// Function to generate a longer, descriptive line (like a couplet)
+function path() {
+    var words = choose(above) + choose(trans) + choose(below) + '。';
+    return words;
+}
+
+function site() {
+    var words = '';
+    if (rand_range(1) == 1) {
+        words += choose(above);
+    } else {
+        words += choose(below);
+    }
+    words += choose(intrans) + '。';
+    return words;
+}
+
+function cave() {
+    var words = '\u00a0\u00a0' + choose(imper) + choose(adjs) + choose(nouns) + '。';
+    return words;
+}
+
+function do_line() {
+    var main = document.getElementById('main');
+    if (t <= 25) {
+        t += 1;
+    } else {
+        main.removeChild(document.getElementById('main').firstChild);
+    }
+
+    var text;
+    if (n === 0) {
+        text = ' ';
+    } else if (n == 1) {
+        paths = 2 + rand_range(2);
+        text = path();
+    } else if (n < paths) {
+        text = site();
+    } else if (n == paths) {
+        text = path();
+    } else if (n == paths + 1) {
+        text = ' ';
+    } else if (n == paths + 2) {
+        text = cave();
+    } else {
+        text = ' ';
+        n = 0;
+    }
+    n += 1;
+        var last = document.createElement('div');
+    last.appendChild(document.createTextNode(text));
+    main.appendChild(last);
+}
+
+function poem() {
+    setInterval(do_line, 1500);
+}
+
+</script>
+
+<title>山水詩</title>
+</head>
+
+<body onload="poem()">
+<div id="colophon"><div>山水&middot; 詩</div>
+<a href="http://nickm.com/taroko_gorge/">Original By Nick Montfort</a>
+</div>
+
+<div id="main"></div>
+
+</body>
+</html>
