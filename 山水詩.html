@@ -116,14 +116,22 @@ function poem() {
 
 <title>山水詩</title>
 </head>
-
 <body onload="poem()">
   <div id="colophon">
     <div class="pink-text">花蓮&middot; 山水詩</div>
     <div class="pink-text">唐萱</div>
     <div class="pink-text">乙巳年白露後十六日</div>
-    <a href="original.html" class="pink-text">作品出自：尼克&middot;蒙特福特</a><br>
+    <a href="original.html" class="pink-text">作品出自：尼克&middot;蒙特福特</a>
   </div>
   <div id="main"></div>
+
+  <style>
+    #colophon .pink-text, 
+    #colophon a.pink-text {
+      display: block;
+      margin-bottom: 1em;
+    }
+  </style>
 </body>
 </html>
+
