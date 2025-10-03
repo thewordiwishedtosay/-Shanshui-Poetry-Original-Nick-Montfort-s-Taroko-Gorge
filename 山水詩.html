@@ -118,9 +118,29 @@ function poem() {
 </head>
 
 <body onload="poem()">
-<div id="colophon"><div class="pink-text">花蓮&middot; 山水詩</div>
-<div class="pink-text">Xuan Tang &middot; 2025-09-21</div>
-<del><a href="original.html" class="pink-text">Nick Montfort</a></del><br></div>
+<div id="colophon"><div class="pink-text">花蓮&middot;山水詩</div>
+<div class="pink-text">唐萱</div>
+<del><a href="original.html" class="pink-text">尼克&middot;蒙特福特</a></del><br></div>
 <div id="main"></div>
+</body>
+</html>
+
+<body onload="poem(); showDate24Qi();">
+  <div id="colophon">
+    <div class="pink-text">花蓮&middot;山水詩</div>
+    <div class="pink-text">唐萱</div>
+    <del><a href="original.html" class="pink-text">尼克&middot;蒙特福特</a></del><br>
+    <div id="date24Qi" class="pink-text"></div>
+  </div>
+  <div id="main"></div>
+
+  <script>
+    function showDate24Qi() {
+      // Example date: 2025-09-21
+      let date = new Date(2025, 8, 21); // JS month is 0-based, so 8 = September
+      let text = "乙巳年白露後十六日"; // hardcoded for now
+      document.getElementById("date24Qi").textContent = text;
+    }
+  </script>
 </body>
 </html>
